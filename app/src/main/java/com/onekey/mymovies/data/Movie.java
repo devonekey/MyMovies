@@ -1,6 +1,7 @@
 package com.onekey.mymovies.data;
 
 public class Movie {
+    private int id;
     private String url;
     private String title;
     private String description;
@@ -10,6 +11,14 @@ public class Movie {
                  String title) {
         this.url = url;
         this.title = title;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUrl() {
