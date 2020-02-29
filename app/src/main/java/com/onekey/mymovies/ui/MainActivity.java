@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
         ActivityMainBinding binding = DataBindingUtil.setContentView(this,
                 R.layout.activity_main);
-        MovieViewModel model = new MovieViewModel();
+        MovieViewModel model = new MovieViewModel(MainActivity.this);
         MovieAdapter adapter = new MovieAdapter(binding.getRoot());
 
         binding.activityMainMovieRecyclerView.setLayoutManager(new LinearLayoutManager(
