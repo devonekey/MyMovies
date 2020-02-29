@@ -82,21 +82,12 @@ public class MovieViewModel extends BaseObservable {
                     "\nsearch : " + search);
         }
 
-        this.search.set(search);
-        notifyPropertyChanged(BR._all);
-    }
-
-    public void onSearchButtonClick() {
-        if (BuildConfig.DEBUG) {
-            Log.d(TAG, "/onSearchButtonClick");
-        }
-
         if (movieList.get() != null
-                && !TextUtils.isEmpty(search.get())) {
+                && !TextUtils.isEmpty(search)) {
             movieList.get().clear();
 
             for (Movie movie : cache) {
-                if (movie.getTitle().contains(search.get())) {
+                if (movie.getTitle().contains(search)) {
                     movieList.get().add(movie);
                 }
             }
@@ -105,7 +96,8 @@ public class MovieViewModel extends BaseObservable {
             movieList.get().addAll(cache);
         }
 
-        notifyChange();
+        this.search.set(search);
+        notifyPropertyChanged(BR._all);
     }
 
     public void onItemClick(int position) {
