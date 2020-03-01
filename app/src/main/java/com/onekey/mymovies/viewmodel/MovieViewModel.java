@@ -37,6 +37,11 @@ public class MovieViewModel extends BaseObservable {
         movieDataRepository.browse(new MovieDataSource.OnBrowseSuccessListener() {
             @Override
             public void onSuccess(@NonNull final List<Movie> movieList) {
+                if (BuildConfig.DEBUG) {
+                    Log.d(TAG, "//onSuccess" +
+                            "\nsize : " + movieList.size());
+                }
+
                 Timer timer = new Timer();
                 TimerTask timerTask = new TimerTask() {
                     @Override
@@ -63,9 +68,7 @@ public class MovieViewModel extends BaseObservable {
                     "\nsize : " + movieObservableArrayList.size());
         }
 
-        return movieObservableArrayList.size() > 0 ?
-                movieObservableArrayList.subList(FIRST_INDEX, movieObservableArrayList.size() - 1) :
-                null;
+        return movieObservableArrayList.subList(FIRST_INDEX, movieObservableArrayList.size());
     }
 
     @Bindable
@@ -83,34 +86,30 @@ public class MovieViewModel extends BaseObservable {
                     "\nsearch : " + search);
         }
 
-        if (movieObservableArrayList.size() > 0
-                && !TextUtils.isEmpty(search)) {
-            movieObservableArrayList.subList(FIRST_INDEX, movieObservableArrayList.size() - 1)
-                    .clear();
+        movieObservableArrayList.subList(FIRST_INDEX, movieObservableArrayList.size())
+                .clear();
 
-            movieDataRepository.browse(new MovieDataSource.OnBrowseSuccessListener() {
-                @Override
-                public void onSuccess(@NonNull List<Movie> movieList) {
+        movieDataRepository.browse(new MovieDataSource.OnBrowseSuccessListener() {
+            @Override
+            public void onSuccess(@NonNull List<Movie> movieList) {
+                if (BuildConfig.DEBUG) {
+                    Log.d(TAG, "/setSearch//onSuccess" +
+                            "\nsize : " + movieList.size());
+                }
+
+                if (TextUtils.isEmpty(search)) {
+                    movieObservableArrayList.addAll(movieList);
+                } else {
                     for (Movie movie : movieList) {
                         if (movie.getTitle().contains(search)) {
                             movieObservableArrayList.add(movie);
-                            notifyPropertyChanged(BR._all);
                         }
                     }
                 }
-            }, null, null);
-        } else if (movieObservableArrayList.size() > 0) {
-            movieObservableArrayList.subList(FIRST_INDEX, movieObservableArrayList.size() - 1)
-                    .clear();
 
-            movieDataRepository.browse(new MovieDataSource.OnBrowseSuccessListener() {
-                @Override
-                public void onSuccess(@NonNull List<Movie> movieList) {
-                    movieObservableArrayList.addAll(movieList);
-                    notifyPropertyChanged(BR._all);
-                }
-            }, null, null);
-        }
+                notifyPropertyChanged(BR._all);
+            }
+        }, null, null);
 
         this.search.set(search);
         notifyPropertyChanged(BR._all);
