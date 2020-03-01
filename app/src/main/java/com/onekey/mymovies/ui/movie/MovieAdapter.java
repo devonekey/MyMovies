@@ -45,7 +45,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieViewHolder> {
 
     @Override
     public int getItemCount() {
-        return binding.getViewModel().getMovieList() != null ?
+        int size = binding.getViewModel().getMovieList() != null ?
                 binding.getViewModel().getMovieList().size() : 0;
+
+        if (BuildConfig.DEBUG) {
+            Log.d(TAG, "/getItemCount" +
+                    "\nsize : " + size);
+        }
+ ;
+        return size;
     }
 }

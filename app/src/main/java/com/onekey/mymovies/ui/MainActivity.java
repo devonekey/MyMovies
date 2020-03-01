@@ -3,6 +3,8 @@ package com.onekey.mymovies.ui;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
@@ -37,16 +39,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @BindingAdapter("onListSet")
-    public static void onListSet(RecyclerView recyclerView,
-                                 List<Movie> list) {
+    public static void onListSet(@NonNull RecyclerView recyclerView,
+                                 @Nullable List<Movie> list) {
         if (BuildConfig.DEBUG) {
             Log.d(TAG, "/onListSet" +
-                    "\nlist is null ? " + (list == null));
-
-            if ((list != null)) {
-                Log.d(TAG, "/onListSet" +
-                        "\nsize : " + list.size());
-            }
+                    "\nsize ? " + (list == null ? "null" : list.size()));
         }
 
         if (recyclerView.getAdapter() != null) {
