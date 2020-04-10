@@ -1,7 +1,9 @@
 package com.onekey.mymovies.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +17,7 @@ import com.onekey.mymovies.BuildConfig;
 import com.onekey.mymovies.R;
 import com.onekey.mymovies.data.Movie;
 import com.onekey.mymovies.databinding.ActivityMainBinding;
+import com.onekey.mymovies.ui.movie.EditMovieActivity;
 import com.onekey.mymovies.ui.movie.MovieAdapter;
 import com.onekey.mymovies.viewmodel.MovieViewModel;
 
@@ -36,6 +39,12 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this, LinearLayoutManager.VERTICAL, false));
         binding.activityMainMovieRecyclerView.setAdapter(adapter);
         binding.setViewModel(model);
+        binding.activityMainFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, EditMovieActivity.class));
+            }
+        });
     }
 
     @BindingAdapter("onListSet")
