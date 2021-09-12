@@ -13,5 +13,5 @@ interface OpenApi {
         @Query("query") query: String,
         @Query("display") display: Int,
         @Query("start") start: Int
-    ): Call<MoviesResult>
+    ): Call<MoviesResult.ForOpenApi>
 }

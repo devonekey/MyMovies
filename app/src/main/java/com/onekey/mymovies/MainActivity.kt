@@ -21,15 +21,33 @@ class MainActivity : AppCompatActivity() {
                 display = 1,
                 start = 1
             )
-            .enqueue(object : Callback<MoviesResult> {
+            .enqueue(object : Callback<MoviesResult.ForOpenApi> {
                 override fun onResponse(
-                    call: Call<MoviesResult>,
-                    response: Response<MoviesResult>
+                    call: Call<MoviesResult.ForOpenApi>,
+                    response: Response<MoviesResult.ForOpenApi>
                 ) {
                     Log.d(TAG, "onResponse\nurl : ${call.request().url}")
                 }
 
-                override fun onFailure(call: Call<MoviesResult>, t: Throwable) {
+                override fun onFailure(call: Call<MoviesResult.ForOpenApi>, t: Throwable) {
+                    Log.d(TAG, "onFailure\nurl : ${call.request().url}")
+                }
+            })
+        NaverMobileApiClient.retrofit
+            .create(MobileApi::class.java)
+            .getCurrentlyShowingMovies()
+            .enqueue(object : Callback<MoviesResult.ForMobileApi> {
+                override fun onResponse(
+                    call: Call<MoviesResult.ForMobileApi>,
+                    response: Response<MoviesResult.ForMobileApi>
+                ) {
+                    Log.d(TAG, "onResponse\nurl : ${call.request().url}")
+                }
+
+                override fun onFailure(
+                    call: Call<MoviesResult.ForMobileApi>,
+                    t: Throwable
+                ) {
                     Log.d(TAG, "onFailure\nurl : ${call.request().url}")
                 }
             })
