@@ -1,4 +1,4 @@
-package com.onekey.mymovies
+package com.onekey.mymovies.data
 
 import java.util.Date
 
