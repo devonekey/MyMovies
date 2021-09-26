@@ -11,8 +11,11 @@ import com.onekey.mymovies.data.source.remote.api.OpenApi
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class MoviesRemoteDataSource : MoviesDataSource {
+@Singleton
+class MoviesRemoteDataSource @Inject constructor() : MoviesDataSource {
     override fun searchMovies(
         onSuccess: ((List<Movie?>?) -> Unit),
         onFailure: ((String?) -> Unit)
