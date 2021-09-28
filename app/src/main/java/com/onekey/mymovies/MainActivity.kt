@@ -13,7 +13,7 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
     @Inject lateinit var viewModel: MoviesViewModel
     private lateinit var binding: ActivityMainBinding
-    private val adapter = MoviesAdapter()
+    private val adapter by lazy { MoviesAdapter(viewModel) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.currentlyShowingMovies
             .observe(
                 this,
-                { movies -> adapter.addAll(movies) }
+                { adapter.notifyDataSetChanged() }
             )
     }
 
