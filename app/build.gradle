@@ -25,7 +25,9 @@ android {
         buildConfigField("String", "NAVER_CLIENT_ID", secretProperties["NAVER_CLIENT_ID"])
         buildConfigField("String", "NAVER_CLIENT_SECRET", secretProperties["NAVER_CLIENT_SECRET"])
     }
-
+    buildFeatures {
+        dataBinding = true
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -38,9 +40,6 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
-    }
-    dataBinding {
-        enabled = true
     }
 }
 
