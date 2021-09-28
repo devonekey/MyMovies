@@ -1,5 +1,6 @@
-package com.onekey.mymovies
+package com.onekey.mymovies.data.source.remote.api
 
+import com.onekey.mymovies.data.MoviesResult
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
