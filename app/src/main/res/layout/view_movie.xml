@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="item"
+            type="com.onekey.mymovies.data.Movie" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="200dp"
         android:layout_height="wrap_content"
@@ -30,6 +37,7 @@
             android:marqueeRepeatLimit="marquee_forever"
             android:scrollHorizontally="true"
             android:singleLine="true"
+            android:text="@{item.title}"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

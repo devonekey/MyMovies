@@ -14,13 +14,13 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             return
         }
 
-        Picasso.get()
-            .load(movie.image)
-            .into(binding.thumbnailImageView)
-        binding.titleTextView
-            .apply {
-                text = movie.title
-                isSelected = true
-            }
+        with(binding) {
+            item = movie
+            titleTextView.isSelected = true
+
+            Picasso.get()
+                .load(movie.image)
+                .into(thumbnailImageView)
+        }
     }
 }
