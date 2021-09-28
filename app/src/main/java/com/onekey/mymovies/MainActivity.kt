@@ -15,8 +15,8 @@ class MainActivity : AppCompatActivity() {
         NaverOpenApiClient.retrofit
             .create(OpenApi::class.java)
             .searchMovies(
-                clientId = getString(R.string.naver_client_id),
-                clientSecret = getString(R.string.naver_client_secret),
+                clientId = BuildConfig.NAVER_CLIENT_ID,
+                clientSecret = BuildConfig.NAVER_CLIENT_SECRET,
                 query = "보스 베이비 2",
                 display = 1,
                 start = 1
