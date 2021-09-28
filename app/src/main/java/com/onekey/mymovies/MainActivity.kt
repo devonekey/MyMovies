@@ -2,17 +2,16 @@ package com.onekey.mymovies
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.onekey.mymovies.data.source.MoviesRepository
 import com.onekey.mymovies.databinding.ActivityMainBinding
 import com.onekey.mymovies.presentation.view.MoviesAdapter
+import com.onekey.mymovies.presentation.viewmodel.MoviesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    @Inject lateinit var repository: MoviesRepository
+    @Inject lateinit var viewModel: MoviesViewModel
     private lateinit var binding: ActivityMainBinding
     private val adapter = MoviesAdapter()
 
@@ -32,24 +31,11 @@ class MainActivity : AppCompatActivity() {
                 )
                 adapter = this@MainActivity.adapter
             }
-        repository.searchMovies(
-            onSuccess = {
-                Log.d(TAG, "searchMovies, onSuccess")
-            },
-            onFailure = {
-                Log.d(TAG, "searchMovies, onFailure")
-            }
-        )
-        repository.getCurrentlyShowingMovies(
-            onSuccess = {
-                Log.d(TAG, "getCurrentlyShowingMovies, onSuccess")
-
-                adapter.addAll(it)
-            },
-            onFailure = {
-                Log.d(TAG, "getCurrentlyShowingMovies, onFailure")
-            }
-        )
+        viewModel.currentlyShowingMovies
+            .observe(
+                this,
+                { movies -> adapter.addAll(movies) }
+            )
     }
 
     companion object {
