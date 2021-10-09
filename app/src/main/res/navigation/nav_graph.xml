@@ -18,5 +18,10 @@
     <fragment
         android:id="@+id/movie_detail_fragment"
         android:name="com.onekey.mymovies.presentation.view.MovieDetailFragment"
-        tools:layout="@layout/fragment_movie_detail" />
+        tools:layout="@layout/fragment_movie_detail">
+
+        <argument
+            android:name="position"
+            app:argType="java.lang.Integer" />
+    </fragment>
 </navigation>

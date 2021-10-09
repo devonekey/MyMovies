@@ -22,7 +22,7 @@ class MovieDetailFragment : Fragment() {
     ): View {
         binding = FragmentMovieDetailBinding.inflate(inflater, container, false)
 
-        viewModel.getCurrentlyShowingMovie(0)
+        viewModel.getCurrentlyShowingMovie(requireArguments().getInt("position"))
 
         return binding.root
     }

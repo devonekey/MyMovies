@@ -19,7 +19,7 @@ class MovieViewHolder(
 
         with(binding) {
             navController = this@MovieViewHolder.navController
-            toMovieDetail = MainFragmentDirections.actionMainToMovieDetail()
+            toMovieDetail = MainFragmentDirections.actionMainToMovieDetail(layoutPosition)
             item = movie
             titleTextView.isSelected = true
         }
