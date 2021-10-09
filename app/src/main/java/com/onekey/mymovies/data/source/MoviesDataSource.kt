@@ -12,4 +12,10 @@ interface MoviesDataSource {
         onSuccess: ((List<Movie?>?) -> Unit),
         onFailure: ((String?) -> Unit)
     )
+
+    fun getCurrentlyShowingMovie(
+        position: Int,
+        onSuccess: ((Movie?) -> Unit),
+        onFailure: ((String?) -> Unit)
+    )
 }

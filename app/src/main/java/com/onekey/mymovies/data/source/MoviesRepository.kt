@@ -9,6 +9,8 @@ import javax.inject.Singleton
 class MoviesRepository @Inject constructor(
     private val moviesRemoteDataSource: MoviesRemoteDataSource
 ) : MoviesDataSource {
+    private var currentlyShowingMovies: List<Movie?>? = null
+
     override fun searchMovies(
         onSuccess: ((List<Movie?>?) -> Unit),
         onFailure: ((String?) -> Unit)
@@ -20,6 +22,23 @@ class MoviesRepository @Inject constructor(
         onSuccess: ((List<Movie?>?) -> Unit),
         onFailure: ((String?) -> Unit)
     ) {
-        moviesRemoteDataSource.getCurrentlyShowingMovies(onSuccess, onFailure)
+        moviesRemoteDataSource.getCurrentlyShowingMovies(
+            onSuccess = { movies ->
+                currentlyShowingMovies = movies
+
+                onSuccess.invoke(currentlyShowingMovies)
+            },
+            onFailure
+        )
+    }
+
+    override fun getCurrentlyShowingMovie(
+        position: Int,
+        onSuccess: (Movie?) -> Unit,
+        onFailure: (String?) -> Unit
+    ) {
+        currentlyShowingMovies?.getOrNull(position)
+            ?.run { onSuccess.invoke(this) }
+            ?: onFailure.invoke("getCurrentlyShowingMovie, onFailure invoked")
     }
 }

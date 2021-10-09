@@ -69,6 +69,13 @@ class MoviesRemoteDataSource @Inject constructor() : MoviesDataSource {
             })
     }
 
+    override fun getCurrentlyShowingMovie(
+        position: Int,
+        onSuccess: (Movie?) -> Unit,
+        onFailure: (String?) -> Unit
+    ) {
+    }
+
     companion object {
         val TAG: String = MoviesRemoteDataSource::class.java.simpleName
     }
