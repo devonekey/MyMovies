@@ -41,8 +41,4 @@ class MainFragment : Fragment() {
 
         return binding.root
     }
-
-    companion object {
-        fun newInstance(): MainFragment = MainFragment()
-    }
 }
