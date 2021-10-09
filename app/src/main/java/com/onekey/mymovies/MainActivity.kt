@@ -2,18 +2,12 @@ package com.onekey.mymovies
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.onekey.mymovies.databinding.ActivityMainBinding
-import com.onekey.mymovies.presentation.view.MoviesAdapter
-import com.onekey.mymovies.presentation.viewmodel.MoviesViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    @Inject lateinit var viewModel: MoviesViewModel
     private lateinit var binding: ActivityMainBinding
-    private val adapter by lazy { MoviesAdapter(viewModel) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,21 +15,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
-
-        binding.moviesRecyclerView
-            .apply {
-                layoutManager = LinearLayoutManager(
-                    this@MainActivity,
-                    LinearLayoutManager.HORIZONTAL,
-                    false
-                )
-                adapter = this@MainActivity.adapter
-            }
-        viewModel.currentlyShowingMovies
-            .observe(
-                this,
-                { adapter.notifyDataSetChanged() }
-            )
     }
 
     companion object {
