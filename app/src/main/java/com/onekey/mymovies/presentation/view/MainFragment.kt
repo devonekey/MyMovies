@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.onekey.mymovies.databinding.FragmentMainBinding
 import com.onekey.mymovies.presentation.viewmodel.MoviesViewModel
@@ -15,7 +16,7 @@ import javax.inject.Inject
 class MainFragment : Fragment() {
     @Inject lateinit var viewModel: MoviesViewModel
     private lateinit var binding: FragmentMainBinding
-    private val adapter by lazy { MoviesAdapter(viewModel) }
+    private val adapter by lazy { MoviesAdapter(findNavController(), viewModel) }
 
     override fun onCreateView(
         inflater: LayoutInflater,

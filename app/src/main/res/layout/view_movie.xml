@@ -6,6 +6,14 @@
     <data>
 
         <variable
+            name="navController"
+            type="androidx.navigation.NavController" />
+
+        <variable
+            name="toMovieDetail"
+            type="androidx.navigation.NavDirections" />
+
+        <variable
             name="item"
             type="com.onekey.mymovies.data.Movie" />
     </data>
@@ -13,7 +21,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:padding="8dp"
+        android:onClick="@{() -> navController.navigate(toMovieDetail)}">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/thumbnail_image_view"
